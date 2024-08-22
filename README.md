@@ -1,52 +1,56 @@
-## Terraform AWS Multi-Component Infrastructure Deployment
+# Terraform AWS Multi-Component Infrastructure Deployment
 
-### This project uses Terraform to deploy a multi-component infrastructure on AWS, including an EC2 instance and an S3 bucket. The Terraform state is stored remotely in an S3 bucket, with DynamoDB handling state locking to prevent concurrent changes.
+This project uses Terraform to deploy a multi-component infrastructure on AWS, including an EC2 instance and an S3 bucket. The Terraform state is stored remotely in an S3 bucket, with DynamoDB handling state locking to prevent concurrent changes.
 
-### Prerequisites
+## Prerequisites
+
 Before you begin, ensure you have the following:
 
-1. Terraform: Install Terraform by following the instructions here.
-2. AWS CLI: Install and configure the AWS CLI with credentials and a default region. You can configure it using:
+1. **Terraform**: Install Terraform by following the instructions [here](https://www.terraform.io/downloads).
+2. **AWS CLI**: Install and configure the AWS CLI with credentials and a default region. You can configure it using:
 
-`aws configure`
+    ```bash
+    aws configure
+    ```
 
-3. AWS Account: You need access to an AWS account with permissions to create EC2 instances, S3 buckets, and DynamoDB tables.
-   
-### Repository Structure
+3. **AWS Account**: You need access to an AWS account with permissions to create EC2 instances, S3 buckets, and DynamoDB tables.
 
-main.tf: Configures the S3 backend and DynamoDB for state management.
-variables.tf: Defines the input variables required for the deployment.
-outputs.tf: Provides outputs like the EC2 public IP, S3 bucket name, and region.
-dynamodb.tf: Creates a DynamoDB table for state locking.
-s3.tf: Creates an S3 bucket for storing the Terraform state.
-modules/infrastructure/: Contains the custom Terraform module for deploying the EC2 instance and S3 bucket.
-main.tf: Resources for EC2 and S3 within the module.
-variables.tf: Variables specific to the module.
-outputs.tf: Outputs related to the infrastructure deployed by the module.
+## Repository Structure
 
+- **main.tf**: Configures the S3 backend and DynamoDB for state management.
+- **variables.tf**: Defines the input variables required for the deployment.
+- **outputs.tf**: Provides outputs like the EC2 public IP, S3 bucket name, and region.
+- **dynamodb.tf**: Creates a DynamoDB table for state locking.
+- **s3.tf**: Creates an S3 bucket for storing the Terraform state.
+- **modules/infrastructure/**: Contains the custom Terraform module for deploying the EC2 instance and S3 bucket.
+  - **main.tf**: Resources for EC2 and S3 within the module.
+  - **variables.tf**: Variables specific to the module.
+  - **outputs.tf**: Outputs related to the infrastructure deployed by the module.
 
-### Step-by-Step Deployment Guide
+## Step-by-Step Deployment Guide
 
-**Step 1: Clone the Repository**
+### Step 1: Clone the Repository
+
 Clone this repository to your local machine:
 
-```
+```bash
 git clone <repository-url>
 cd <repository-folder>
-````
+```
+# Terraform Setup Guide
 
-**Step 2: Set Up S3 Bucket and DynamoDB for State Management**
+## Step 2: Set Up S3 Bucket and DynamoDB for State Management
 
 Note: You can either create the S3 bucket and DynamoDB table manually or use Terraform to manage them.
 
-Create S3 Bucket:
+### Create S3 Bucket
 
-Modify s3.tf to specify a unique bucket name.
-Run Terraform to create the S3 bucket:
-```
-terraform init
-terraform apply -target=aws_s3_bucket.terraform_state
-```
+1. Modify `s3.tf` to specify a unique bucket name.
+2. Run Terraform to create the S3 bucket:
+   ```bash
+   terraform init
+   terraform apply -target=aws_s3_bucket.terraform_state
+   ```
 
 Create DynamoDB Table:
 
