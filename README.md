@@ -61,9 +61,9 @@ Run Terraform to create the DynamoDB table:
 terraform apply -target=aws_dynamodb_table.terraform_locks
 ```
 
-**Step 3: Initialize Terraform and Apply the Configuration**
+## Step 3: Initialize Terraform and Apply the Configuration
 
-Initialize Terraform:
+### Initialize Terraform:
 Initialize Terraform to download necessary providers and set up the backend:
 
 `terraform init`
@@ -78,30 +78,30 @@ Apply the configuration to deploy the infrastructure:
 
 `terraform apply`
 
-**Step 4: Verify the Deployment**
+## Step 4: Verify the Deployment
 
-After applying the configuration, Terraform will output key information such as:
+### After applying the configuration, Terraform will output key information such as:
 
 EC2 Public IP
 S3 Bucket Name
 Region
 Use this information to verify that the EC2 instance and S3 bucket were created successfully.
 
-**Step 5: Testing State Locking**
+## Step 5: Testing State Locking
 
-Open two terminal windows.
+### Open two terminal windows.
 In both terminals, run:
 
 `terraform apply`
 
 Verify that DynamoDB locks the state file, preventing concurrent updates.
 
-**Step 6: Modify and Re-Apply Infrastructure**
+## Step 6: Modify and Re-Apply Infrastructure
 
 Modify any variable, such as the instance type in variables.tf.
 Re-run terraform apply to observe how Terraform manages state changes and applies updates.
 
-### Clean Up
+## Clean Up
 To clean up the resources created by this project, run:
 
 `terraform destroy`
